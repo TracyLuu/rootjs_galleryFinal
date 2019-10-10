@@ -19,6 +19,14 @@ var pictures = [
 	'images/pretty.jpg',
 ];
 
+var first_img = $('<figure>')
+$("#gallery img").modal();
+$("#gallery img").attr('images/landscape-1.jpg');
+
+// .on('click','button', function(){
+// 	console.log('click handler added by delegate on')
+// })
+
 function initiateApp(){
 	/*advanced: add jquery sortable call here to make the gallery able to be sorted
 		//on change, rebuild the images array into the new order
@@ -27,8 +35,23 @@ function initiateApp(){
 	addModalCloseHandler();
 }
 function makeGallery(imageArray){
+
 	//use loops and jquery dom creation to make the html structure inside the #gallery section
 
+	for (var pictureNumber = 0;pictureNumber<imageArray.length;pictureNumber++){
+		console.log("picture number",pictureNumber)
+		/*
+		<figure class="imageGallery col-xs-12 col-sm-6 col-md-4" style="background-image:url(images/landscape-2.jpg);">
+			<figcaption>landscape-2.jpg</figcaption>
+		</figure>
+		*/
+		var figure = $('<figure>');
+		figure.addClass('imageGallery col-xs-12 col-sm-6 col-md-4');
+		console.log( imageArray[pictureNumber] )
+		figure.css('background-image', 'url('+imageArray[pictureNumber]+')')
+		$('#gallery').append(figure);
+
+	}
 	//create a loop to go through the images in the imageArray
 		//create the elements needed for each picture, store the elements in variable
 
@@ -43,6 +66,8 @@ function makeGallery(imageArray){
 function addModalCloseHandler(){
 	//add a click handler to the img element in the image modal.  When the element is clicked, close the modal
 	//for more info, check here: https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp	
+	
+	
 }
 
 function displayImage(){
