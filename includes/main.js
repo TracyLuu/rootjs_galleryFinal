@@ -19,10 +19,6 @@ var pictures = [
 	'images/pretty.jpg',
 ];
 
-var first_img = $('<figure>')
-$("#gallery img").modal();
-$("#gallery img").attr('images/landscape-1.jpg');
-
 // .on('click','button', function(){
 // 	console.log('click handler added by delegate on')
 // })
@@ -33,7 +29,22 @@ function initiateApp(){
 	*/
 	makeGallery(pictures);
 	addModalCloseHandler();
+
+	$("#gallery").on("click",".imageGallery", onImageClick)
+
 }
+
+
+function onImageClick(){
+	var src = $(this).data("url")
+	console.log('source', src);
+
+	$('#image-output').attr('src', src);
+	$('#galleryModal').modal('show');
+
+
+}
+
 function makeGallery(imageArray){
 
 	//use loops and jquery dom creation to make the html structure inside the #gallery section
@@ -47,11 +58,41 @@ function makeGallery(imageArray){
 		*/
 		var figure = $('<figure>');
 		figure.addClass('imageGallery col-xs-12 col-sm-6 col-md-4');
-		console.log( imageArray[pictureNumber] )
 		figure.css('background-image', 'url('+imageArray[pictureNumber]+')')
+		figure.data("url", imageArray[pictureNumber])
 		$('#gallery').append(figure);
 
+		console.log(imageArray[pictureNumber])
+
+		// var galleryImages= $("#gallery img")
+
+		console.log('figure',figure.data());
+
+		//$('#gallery').attr('src', 'url('+imageArray[pictureNumber]+')');
+		  
+		// figure.onclick = function(){
+		// 	// $(this).attr('src');
+		// var src = $(this).attr("src");
+		// console.log('source', src);
+
+			// $(this).modal();
+		// // 	galleryImages.show('src', imageArray[pictureNumber]);
+		// // 	galleryImages.data();
+		// // 	galleryImages.on('show modal', imageArray);
+		// // 	var galleryImages = a.relatedTarget.childNodes[0].src;
+		// //   displayPhotos(galleryImages);
+		// };
+
+
+		// galleryImages.modal(figure);
+		// galleryImages.addClass('btn btn-info btn-lg')
+		// galleryImages.attr(figure);
+		// console.log("figure",figure)
+		// console.log('Gallery Images', galleryImages)
+
 	}
+	
+	
 	//create a loop to go through the images in the imageArray
 		//create the elements needed for each picture, store the elements in variable
 
