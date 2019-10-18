@@ -19,6 +19,8 @@ var pictures = [
 	'images/pretty.jpg',
 ];
 
+
+
 // .on('click','button', function(){
 // 	console.log('click handler added by delegate on')
 // })
@@ -30,18 +32,9 @@ function initiateApp(){
 	makeGallery(pictures);
 	addModalCloseHandler();
 
+
 	$("#gallery").on("click",".imageGallery", onImageClick)
-
-}
-
-
-function onImageClick(){
-	var src = $(this).data("url")
-	console.log('source', src);
-
-	$('#image-output').attr('src', src);
-	$('#galleryModal').modal('show');
-
+	
 
 }
 
@@ -50,7 +43,7 @@ function makeGallery(imageArray){
 	//use loops and jquery dom creation to make the html structure inside the #gallery section
 
 	for (var pictureNumber = 0;pictureNumber<imageArray.length;pictureNumber++){
-		console.log("picture number",pictureNumber)
+		// console.log("picture number",pictureNumber)
 		/*
 		<figure class="imageGallery col-xs-12 col-sm-6 col-md-4" style="background-image:url(images/landscape-2.jpg);">
 			<figcaption>landscape-2.jpg</figcaption>
@@ -62,33 +55,10 @@ function makeGallery(imageArray){
 		figure.data("url", imageArray[pictureNumber])
 		$('#gallery').append(figure);
 
-		console.log(imageArray[pictureNumber])
+		// console.log(imageArray[pictureNumber])
 
-		// var galleryImages= $("#gallery img")
+		// console.log('figure',figure.data());
 
-		console.log('figure',figure.data());
-
-		//$('#gallery').attr('src', 'url('+imageArray[pictureNumber]+')');
-		  
-		// figure.onclick = function(){
-		// 	// $(this).attr('src');
-		// var src = $(this).attr("src");
-		// console.log('source', src);
-
-			// $(this).modal();
-		// // 	galleryImages.show('src', imageArray[pictureNumber]);
-		// // 	galleryImages.data();
-		// // 	galleryImages.on('show modal', imageArray);
-		// // 	var galleryImages = a.relatedTarget.childNodes[0].src;
-		// //   displayPhotos(galleryImages);
-		// };
-
-
-		// galleryImages.modal(figure);
-		// galleryImages.addClass('btn btn-info btn-lg')
-		// galleryImages.attr(figure);
-		// console.log("figure",figure)
-		// console.log('Gallery Images', galleryImages)
 
 	}
 	
@@ -106,13 +76,46 @@ function makeGallery(imageArray){
 
 function addModalCloseHandler(){
 	//add a click handler to the img element in the image modal.  When the element is clicked, close the modal
+	
+	$('#image-output').on('click', function() { 
+		$('#galleryModal').modal('hide')
+	  });
+
+
 	//for more info, check here: https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp	
 	
 	
 }
 
+function onImageClick(){
+	
+	var src = $(this).data("url")
+	// console.log('source', src);
+	$('#image-output').attr('src', src);
+	$('#galleryModal').modal('show');
+
+	var urlGiven = $(this).css('background-image');
+	var urlBegin = urlGiven.lastIndexOf('/')+1;
+	var urlEnd = urlGiven.lastIndexOf('.');
+	var cleanUrl = urlGiven.slice(urlBegin, urlEnd);
+
+	// console.log('cleanUrl', cleanUrl);
+
+	var title = $('.modal-title').text(cleanUrl);
+
+	// console.log('new title displayed', title);
+
+	$('.modal-body').attr('src', urlGiven);
+	
+	$('#galleryModal').modal();
+}
+
+
 function displayImage(){
+	/* I did this section in the previous function and decided to just use .
+	//	Rearranged this section to place in the function above.
 	//find the url of the image by grabbing the background-image source, store it in a variable
+
 	//grab the direct url of the image by getting rid of the other pieces you don't need
 
 	//grab the name from the file url, ie the part without the path.  so "images/pexels-photo-132037.jpeg" would become
@@ -120,12 +123,15 @@ function displayImage(){
 		//take a look at the lastIndexOf method
 
 	//change the modal-title text to the name you found above
+	
 	//change the src of the image in the modal to the url of the image that was clicked on
 
 	//show the modal with JS.  Check for more info here: 
-	//https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp
-}
 
+	//https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp
+
+
+}
 
 
 
