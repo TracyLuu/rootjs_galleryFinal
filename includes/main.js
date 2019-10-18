@@ -82,7 +82,6 @@ function addModalCloseHandler(){
 	  });
 
 	//for more info, check here: https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp	
-	
 }
 
 function onImageClick(){
@@ -107,7 +106,6 @@ function onImageClick(){
 	
 	$('#galleryModal').modal();
 }
-
 
 function displayImage(){
 	/* I did this section in the previous function and decided to just use .
