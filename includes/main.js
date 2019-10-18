@@ -81,9 +81,7 @@ function addModalCloseHandler(){
 		$('#galleryModal').modal('hide')
 	  });
 
-
 	//for more info, check here: https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp	
-	
 	
 }
 
